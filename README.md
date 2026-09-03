@@ -37,5 +37,3 @@ npm run build
 - Sequence diagram
 - Simplified ERD
 - Prototype screenshots
-
-<!-- GitHub write access verified -->
