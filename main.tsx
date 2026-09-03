@@ -1,0 +1,70 @@
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import { ArrowRight, ArrowUpRight, Download } from 'lucide-react'
+import './styles.css'
+
+const Section = ({id, eyebrow, title, children}:{id?:string; eyebrow?:string; title?:string; children:React.ReactNode}) => (
+  <section id={id} className="section">
+    <div className="container">
+      {(eyebrow || title) && <div className="section-head">{eyebrow && <p className="eyebrow">{eyebrow}</p>}{title && <h2>{title}</h2>}</div>}
+      {children}
+    </div>
+  </section>
+)
+
+const Placeholder = ({label, title, note}:{label:string; title:string; note?:string}) => (
+  <div className="placeholder"><p className="eyebrow">{label}</p><h3>{title}</h3>{note && <p>{note}</p>}<span>Replace with final project artifact</span></div>
+)
+
+function Nav(){
+  return <header className="nav"><div className="container nav-inner"><a className="brand" href="/">TUAN MINH</a><nav><a href="/#about">About</a><a href="/#experience">Experience</a><a href="/#work">Projects</a><a href="/#contact">Contact</a></nav></div></header>
+}
+
+function Home(){
+  return <><Nav/><main>
+    <section className="hero"><div className="container"><p className="eyebrow">BUSINESS ANALYST</p><h1>Tuan Minh</h1><p className="hero-copy">Bridging business needs and practical system solutions.</p><p className="sub">Business Analysis · ERP · HRM · System Analysis</p><p className="value">Business Analyst with hands-on experience in ERP and HRM, from requirement analysis and process modeling to SIT/UAT and implementation support.</p><div className="actions"><a className="btn primary" href="#work">View My Work <ArrowRight size={16}/></a><a className="btn" href="/cv.pdf">Download CV <Download size={16}/></a></div></div></section>
+    <Section id="about" eyebrow="01 / ABOUT" title="Focused on understanding processes before proposing systems."><div className="two-col"><p>I work between business stakeholders and delivery teams: eliciting and analysing requirements, studying how work is carried out, and translating that understanding into structured documentation and system design.</p><div className="cap-grid">{['Requirements','Process Analysis','System Modeling','Delivery Support'].map(x=><div key={x}>{x}</div>)}</div></div></Section>
+    <Section id="experience" eyebrow="02 / EXPERIENCE" title="Professional experience"><div className="timeline">
+      <article><h3>MATTECH</h3><p className="muted">Business Analyst · ERP & HRM</p><p>Analyzed and improved ERP workflows across Kinh doanh, Vận tải, Kho–Kế toán, Bán hàng and Nhân sự. Participated in the analysis and design of HRM functions with a focus on Recruitment and Payroll. Translated business needs into requirements, system specifications and wireframes while coordinating with Development and QA through SIT/UAT and deployment.</p><div className="chips">{['ERP','HRM','BRD','SRS/FSD','Wireframe','SIT/UAT'].map(x=><span key={x}>{x}</span>)}</div></article>
+      <article><h3>BRAVO</h3><p className="muted">ERP / Business Analysis Internship</p><p>Exposure to ERP, business and accounting processes, with additional recruitment-system analysis used as the foundation for the graduation thesis case study.</p></article>
+    </div></Section>
+    <Section id="work" eyebrow="03 / SELECTED WORK" title="Business analysis case study"><div className="project-card"><div><p className="eyebrow">PROJECT / 01</p><h3>BRAVO Recruitment Management System</h3><p>An academic business analysis and system design case study exploring centralized candidate management, recruitment tracking and candidate evaluation.</p><div className="chips">{['Business Analysis','System Analysis','HRM'].map(x=><span key={x}>{x}</span>)}</div><a className="text-link" href="/projects/recruitment-management">View Case Study <ArrowRight size={16}/></a></div><Placeholder label="Project visual" title="Candidate UI + HR Dashboard + BA artifact" /></div></Section>
+    <Section id="skills" eyebrow="04 / SKILLS" title="Methods, models and tools"><div className="three-col">{[
+      ['Business Analysis',['Requirement Elicitation','Requirement Analysis','Business Process Analysis','BRD','SRS/FSD','User Story','Acceptance Criteria','Use Case','SIT/UAT']],
+      ['Modeling',['BPMN','UML','Use Case Diagram','Activity Diagram','Sequence Diagram','ERD']],
+      ['Tools',['Jira','Draw.io','Figma','Lucidchart','SQL','Canva']]
+    ].map(([h,items])=><div key={h as string}><p className="eyebrow">{h as string}</p><ul>{(items as string[]).map(i=><li key={i}>{i}</li>)}</ul></div>)}</div></Section>
+    <Section id="contact" eyebrow="05 / CONTACT" title="Let's connect."><div className="contact-list"><a href="mailto:your.email@example.com">Email <ArrowUpRight size={16}/></a><a href="https://linkedin.com/in/your-profile">LinkedIn <ArrowUpRight size={16}/></a><a href="https://github.com/your-username">GitHub <ArrowUpRight size={16}/></a></div></Section>
+  </main></>
+}
+
+const metrics = [
+  ['66.7%','Current Process','20 of 30 respondents evaluated the current recruitment process as ineffective.'],
+  ['76.7%','Application Tracking','Respondents reported difficulty related to the lack of application-status tracking.'],
+  ['50%','Candidate Management','Half considered candidate-application management and tracking difficult or relatively difficult.']
+]
+
+function CaseStudy(){
+  return <><Nav/><main>
+    <section className="case-hero"><div className="container"><p className="eyebrow">PROJECT / 01</p><h1>Recruitment Management System</h1><p className="hero-copy small">From fragmented recruitment data to a centralized candidate-management experience.</p><div className="meta"><div><span>Role</span>Business Analyst / System Designer</div><div><span>Domain</span>Recruitment / HRM</div><div><span>Type</span>Graduation Thesis / Academic Project</div></div><div className="meta secondary"><div><span>Methods</span>Interview · Observation · Survey · Document Analysis</div><div><span>Artifacts</span>Requirements · Use Case · Activity · Sequence · ERD · UI</div></div></div></section>
+    <div className="container"><Placeholder label="Hero visual" title="Recruitment Management System — project cover" /></div>
+    <nav className="case-nav"><div className="container">{['Overview','Research','Requirements','Solution','Deep Dive','Analysis','Prototype','Outcome'].map(x=><a key={x} href={`#${x.toLowerCase().replace(' ','-')}`}>{x}</a>)}</div></nav>
+    <Section id="overview" eyebrow="01 / CONTEXT" title="Understanding the recruitment management problem"><div className="two-col"><p>The existing recruitment website supports publishing recruitment information and receiving candidate applications, but candidate information is handled through multiple channels and supporting tools, creating challenges for centralized management and application tracking.</p><p>The project explores a centralized recruitment-management solution supporting candidate data management, recruitment tracking and candidate evaluation.</p></div></Section>
+    <Section id="research" eyebrow="02 / DISCOVERY" title="Understanding the problem before designing the solution"><div className="four-col">{[['Interview','Discussed recruitment activities and management challenges.'],['Observation','Observed recruitment-related workflows during internship.'],['Survey','30 responses related to the current recruitment process.'],['Document Analysis','Reviewed recruitment information, website functionality and supporting materials.']].map(([a,b])=><div key={a}><p className="eyebrow">{a}</p><p>{b}</p></div>)}</div><div className="artifact-gap"><Placeholder label="AS-IS / BPMN" title="Current Recruitment Process" note="Department · Management · HR · Candidate"/></div><div className="metrics">{metrics.map(([v,l,d])=><div key={v}><strong>{v}</strong><p className="eyebrow">{l}</p><p>{d}</p></div>)}</div></Section>
+    <Section id="requirements" eyebrow="03 / PROBLEM → REQUIREMENT" title="Translating problems into requirements"><div className="mapping">{[
+      ['Fragmented candidate data','Centralize recruitment information','Candidate & Application Management'],
+      ['Manual tracking','Standardize recruitment lifecycle','Application Status Management'],
+      ['Limited candidate visibility','Improve transparency','Application Tracking'],
+      ['Limited evaluation support','Support HR screening','Candidate–Job Matching'],
+      ['Distributed recruitment management','Control organizational access','Role / Branch-based Management']
+    ].map(r=><div className="map-row" key={r[0]}><span>{r[0]}</span><b>→</b><span>{r[1]}</span><b>→</b><span className="accent">{r[2]}</span></div>)}</div><div className="three-col scope">{[['Candidate',['Search Jobs','View Job Details','Manage Profile','Apply for Jobs','Track Applications']],['HR',['Manage Job Postings','Manage Candidates','Manage Applications','Filter / Evaluate Candidates','Configure Evaluation Criteria']],['Admin',['Manage Accounts','Manage Categories','Manage Branch / System Data','Manage Access']]].map(([h,it])=><div key={h as string}><p className="eyebrow">{h as string}</p><ul>{(it as string[]).map(i=><li key={i}>{i}</li>)}</ul></div>)}</div><div className="artifact-gap"><Placeholder label="USE CASE" title="Use Case Overview"/></div></Section>
+    <Section id="solution" eyebrow="04 / SOLUTION" title="A single platform for recruitment data"><div className="solution-flow"><div>Candidate Portal</div><div>HR Portal</div><div>Admin Portal</div><strong>↓</strong><div className="wide">Recruitment Management Platform</div><strong>↓</strong><div className="wide accent-box">Centralized Recruitment Data</div></div><div className="four-col">{[['Centralize','Bring recruitment and candidate information together.'],['Track','Make application status visible across the lifecycle.'],['Evaluate','Support consistent review of candidate–job fit.'],['Control','Manage access according to organizational scope.']].map(([a,b])=><div key={a}><h3>{a}</h3><p>{b}</p></div>)}</div></Section>
+    <Section id="deep-dive" eyebrow="05 / FEATURE DEEP DIVE" title="Candidate–Job Matching"><p className="lead">How can HR identify candidates who better align with job requirements?</p><div className="matching"><div><p className="eyebrow">Job Requirements</p><div className="chips">{['Major','Location','Gender','Age','Language','Qualification'].map(x=><span key={x}>{x}</span>)}</div></div><strong>+</strong><div><p className="eyebrow">Priority Weights</p><p>Configured per recruitment posting</p></div><strong>+</strong><div><p className="eyebrow">Candidate Profile</p><p>Profile data used for fit evaluation</p></div><strong>↓</strong><div className="wide accent-box">Matching Evaluation → Fit Score → Candidate Ranking → HR Review</div></div><div className="rules">{['BR/01 Priority criteria are configured per job posting.','BR/02 Criteria are associated with the corresponding posting.','BR/03 Candidate profile information is evaluated against configured recruitment criteria.','BR/04 Evaluation results support HR review and prioritization.','BR/05 Recruitment information is managed according to authorized organizational scope.'].map(x=><p key={x}>{x}</p>)}</div></Section>
+    <Section id="analysis" eyebrow="06 / SYSTEM ANALYSIS" title="From business behaviour to system behaviour"><div className="usecase"><div><span>Use Case</span><b>UC11 — Apply for Job</b></div><div><span>Actor</span>Candidate</div><div><span>Goal</span>Submit an application for a selected job</div><div><span>Preconditions</span>Logged in · Email verified · Job exists</div><div><span>Main Flow</span>View Job → Apply → Create Application → Save → Confirmation</div><div><span>Exception</span>Application is unavailable if email has not been verified</div><div><span>Postcondition</span>Application request is stored in the system</div></div><div className="artifact-stack"><Placeholder label="ACTIVITY DIAGRAM" title="Candidate Application Workflow"/><Placeholder label="SEQUENCE DIAGRAM" title="Apply for Job — System Interaction"/><div className="two-col"><div><p className="eyebrow">Data Model</p><p>A simplified business-facing ERD should focus on Candidate, Application, Job Posting, Branch, Category, Priority Criteria, Province and Language.</p></div><Placeholder label="ERD" title="Simplified Recruitment Data Model"/></div></div></Section>
+    <Section id="prototype" eyebrow="07 / PROTOTYPE" title="Bringing the solution to life"><div className="gallery">{['Job Discovery','Job Detail + Apply','Application Tracking','Job Management','Candidate Management','Candidate Evaluation / Matching'].map((x,i)=><div className={i===5?'featured-shot':''} key={x}><Placeholder label="SCREENSHOT" title={x}/></div>)}</div><div className="automation"><p className="eyebrow">PROCESS AUTOMATION</p>{['New Application → Store → Notify HR','Recruitment Data → Aggregate → Summary → Email HR','Pending Application → Scheduled Check → Reminder → HR'].map(x=><div key={x}>{x}</div>)}</div></Section>
+    <Section id="outcome" eyebrow="08 / DELIVERABLES & OUTCOME" title="What the project produced"><div className="four-col">{[['Research','Interview · Observation · Survey'],['Analysis','Requirements · Use Cases'],['Design','Processes · Data · UI'],['Prototype','Working recruitment platform']].map(([a,b])=><div key={a}><p className="eyebrow">{a}</p><p>{b}</p></div>)}</div><div className="reflection"><h3>What I learned</h3><p><b>Start with the problem.</b> Understanding the existing process came before defining features.</p><p><b>Requirements need traceability.</b> Findings, business needs and system capabilities should connect clearly.</p><p><b>Business and technology must connect.</b> Modeling and prototyping helped translate requirements into system behaviour.</p></div></Section>
+  </main></>
+}
+
+function App(){ return window.location.pathname.startsWith('/projects/recruitment-management') ? <CaseStudy/> : <Home/> }
+createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>)
