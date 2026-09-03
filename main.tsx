@@ -1,6 +1,6 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { ArrowRight, ArrowUpRight, Download } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import './styles.css'
 
 const Section = ({id, eyebrow, title, children}:{id?:string; eyebrow?:string; title?:string; children:React.ReactNode}) => (
@@ -17,25 +17,60 @@ const Placeholder = ({label, title, note}:{label:string; title:string; note?:str
 )
 
 function Nav(){
-  return <header className="nav"><div className="container nav-inner"><a className="brand" href="/">TUAN MINH</a><nav><a href="/#about">About</a><a href="/#experience">Experience</a><a href="/#work">Projects</a><a href="/#contact">Contact</a></nav></div></header>
+  return <header className="nav"><div className="container nav-inner"><a className="brand" href="/">TUAN MINH <span>/ BUSINESS ANALYST</span></a><nav><a href="/#about">About</a><a href="/#experience">Experience</a><a href="/#work">Case Study</a><a href="/#skills">Skills</a><a href="/#contact">Contact</a></nav></div></header>
+}
+
+const capabilityItems = [
+  ['Requirements','Elicitation, analysis and structured specifications that connect business needs to delivery.'],
+  ['Process Analysis','As-Is / To-Be thinking, business rules and workflow modeling for operational processes.'],
+  ['System Modeling','BPMN, UML, wireframes and data-oriented analysis to make behaviour and scope explicit.'],
+  ['Delivery Support','Collaboration with Development and QA through clarification, SIT/UAT and implementation support.']
+]
+
+function ProjectVisual(){
+  return <div className="project-visual" aria-label="Recruitment management case study overview">
+    <div className="project-visual-top"><span>RECRUITMENT MANAGEMENT</span><span>CASE STUDY 01</span></div>
+    <div className="project-visual-grid">
+      <div className="visual-panel">
+        <p className="eyebrow">Candidate</p>
+        <strong>Discover → Apply → Track</strong>
+        <div className="mini-lines"><span/><span/><span/></div>
+      </div>
+      <div className="visual-panel">
+        <p className="eyebrow">HR</p>
+        <strong>Post → Review → Evaluate</strong>
+        <div className="mini-score"><b>Fit</b><span>86</span></div>
+      </div>
+      <div className="visual-panel wide-panel">
+        <p className="eyebrow">BA Artifacts</p>
+        <div className="artifact-tags"><span>BPMN</span><span>Use Case</span><span>Activity</span><span>Sequence</span><span>ERD</span></div>
+      </div>
+    </div>
+  </div>
 }
 
 function Home(){
   return <><Nav/><main>
-    <section className="hero"><div className="container"><p className="eyebrow">BUSINESS ANALYST</p><h1>Tuan Minh</h1><p className="hero-copy">Bridging business needs and practical system solutions.</p><p className="sub">Business Analysis · ERP · HRM · System Analysis</p><p className="value">Business Analyst with hands-on experience in ERP and HRM, from requirement analysis and process modeling to SIT/UAT and implementation support.</p><div className="actions"><a className="btn primary" href="#work">View My Work <ArrowRight size={16}/></a><a className="btn" href="/cv.pdf">Download CV <Download size={16}/></a></div></div></section>
-    <Section id="about" eyebrow="01 / ABOUT" title="Focused on understanding processes before proposing systems."><div className="two-col"><p>I work between business stakeholders and delivery teams: eliciting and analysing requirements, studying how work is carried out, and translating that understanding into structured documentation and system design.</p><div className="cap-grid">{['Requirements','Process Analysis','System Modeling','Delivery Support'].map(x=><div key={x}>{x}</div>)}</div></div></Section>
-    <Section id="experience" eyebrow="02 / EXPERIENCE" title="Professional experience"><div className="timeline">
-      <article><h3>MATTECH</h3><p className="muted">Business Analyst · ERP & HRM</p><p>Analyzed and improved ERP workflows across Kinh doanh, Vận tải, Kho–Kế toán, Bán hàng and Nhân sự. Participated in the analysis and design of HRM functions with a focus on Recruitment and Payroll. Translated business needs into requirements, system specifications and wireframes while coordinating with Development and QA through SIT/UAT and deployment.</p><div className="chips">{['ERP','HRM','BRD','SRS/FSD','Wireframe','SIT/UAT'].map(x=><span key={x}>{x}</span>)}</div></article>
-      <article><h3>BRAVO</h3><p className="muted">ERP / Business Analysis Internship</p><p>Exposure to ERP, business and accounting processes, with additional recruitment-system analysis used as the foundation for the graduation thesis case study.</p></article>
+    <section className="hero"><div className="container hero-grid"><div className="hero-main"><p className="eyebrow">BUSINESS ANALYST · ERP / HRM</p><h1>Tuan Minh</h1><p className="hero-copy">Turning business processes into clear, practical system solutions.</p><p className="value">Business Analyst with hands-on experience across ERP and HRM, working from requirement analysis and process modeling to system specification, SIT/UAT and implementation support.</p><div className="actions"><a className="btn primary" href="/projects/recruitment-management">View Case Study <ArrowRight size={16}/></a><a className="btn" href="#experience">Explore Experience <ArrowRight size={16}/></a></div></div><aside className="profile-card"><p className="eyebrow">BA PROFILE</p><div className="profile-row"><span>Domain</span><b>ERP · HRM</b></div><div className="profile-row"><span>Analysis</span><b>Requirements · Process</b></div><div className="profile-row"><span>Modeling</span><b>BPMN · UML · Wireframe</b></div><div className="profile-row"><span>Delivery</span><b>SIT/UAT · Implementation</b></div><div className="profile-focus">From business problem<br/>to system behaviour.</div></aside></div></section>
+
+    <Section id="about" eyebrow="01 / ABOUT" title="I start with how the business works — then define what the system should do."><div className="about-intro"><p className="lead-paragraph">My work sits between business stakeholders and delivery teams. I investigate workflows, clarify requirements and translate business needs into documentation, models and interfaces that Development and QA can build and validate.</p><p className="about-note">My current focus is becoming a well-rounded Business Analyst with deeper expertise in ERP and HRM, while strengthening end-to-end analysis from discovery through delivery.</p></div><div className="capability-grid">{capabilityItems.map(([title,description])=><article key={title}><span className="cap-number">0{capabilityItems.findIndex(x=>x[0]===title)+1}</span><h3>{title}</h3><p>{description}</p></article>)}</div></Section>
+
+    <Section id="experience" eyebrow="02 / EXPERIENCE" title="Experience across enterprise processes and system delivery"><div className="experience-list">
+      <article className="experience-item"><div className="experience-meta"><p className="eyebrow">MATTECH</p><h3>Business Analyst</h3><p>ERP · HRM</p></div><div className="experience-body"><p>Analyzed and improved ERP workflows across Sales/Business, Transportation, Warehouse–Accounting, Sales Operations and Human Resources, translating operational needs into practical system changes.</p><p>Participated in the analysis and design of HRM functions with a focus on <b>Recruitment</b> and <b>Payroll</b>, working from business requirements through functional behaviour and interface design.</p><p>Produced requirements and system specifications, wireframes/mockups, and coordinated with Development and QA during clarification, SIT/UAT, issue handling and implementation support.</p><div className="chips">{['ERP','HRM','Requirements','BRD','SRS/FSD','Wireframe','SIT/UAT'].map(x=><span key={x}>{x}</span>)}</div></div></article>
+      <article className="experience-item secondary-exp"><div className="experience-meta"><p className="eyebrow">BRAVO</p><h3>ERP Implementation / SQL</h3><p>Enterprise Software</p></div><div className="experience-body"><p>Built a foundation in ERP operations by working with SQL for data checking and reconciliation, learning accounting principles and understanding how enterprise processes are operated through an ERP system.</p><p>This experience strengthened the business and data perspective later applied to Business Analysis work and the recruitment-management graduation case study.</p><div className="chips">{['ERP','SQL','Business Process','Accounting Process','Data Reconciliation'].map(x=><span key={x}>{x}</span>)}</div></div></article>
     </div></Section>
-    <Section id="work" eyebrow="03 / SELECTED WORK" title="Business analysis case study"><div className="project-card"><div><p className="eyebrow">PROJECT / 01</p><h3>BRAVO Recruitment Management System</h3><p>An academic business analysis and system design case study exploring centralized candidate management, recruitment tracking and candidate evaluation.</p><div className="chips">{['Business Analysis','System Analysis','HRM'].map(x=><span key={x}>{x}</span>)}</div><a className="text-link" href="/projects/recruitment-management">View Case Study <ArrowRight size={16}/></a></div><Placeholder label="Project visual" title="Candidate UI + HR Dashboard + BA artifact" /></div></Section>
-    <Section id="skills" eyebrow="04 / SKILLS" title="Methods, models and tools"><div className="three-col">{[
-      ['Business Analysis',['Requirement Elicitation','Requirement Analysis','Business Process Analysis','BRD','SRS/FSD','User Story','Acceptance Criteria','Use Case','SIT/UAT']],
-      ['Modeling',['BPMN','UML','Use Case Diagram','Activity Diagram','Sequence Diagram','ERD']],
-      ['Tools',['Jira','Draw.io','Figma','Lucidchart','SQL','Canva']]
-    ].map(([h,items])=><div key={h as string}><p className="eyebrow">{h as string}</p><ul>{(items as string[]).map(i=><li key={i}>{i}</li>)}</ul></div>)}</div></Section>
-    <Section id="contact" eyebrow="05 / CONTACT" title="Let's connect."><div className="contact-list"><a href="mailto:your.email@example.com">Email <ArrowUpRight size={16}/></a><a href="https://linkedin.com/in/your-profile">LinkedIn <ArrowUpRight size={16}/></a><a href="https://github.com/your-username">GitHub <ArrowUpRight size={16}/></a></div></Section>
-  </main></>
+
+    <Section id="work" eyebrow="03 / FEATURED CASE STUDY" title="One project, shown from problem discovery to system design"><div className="project-card"><div className="project-copy"><p className="eyebrow">PROJECT / 01 · HRM / RECRUITMENT</p><h3>Recruitment Management & Online Application System</h3><p>A Business Analysis and System Design case study based on my graduation thesis. The project investigates a fragmented recruitment process, translates findings into requirements, and designs a centralized solution for candidate management, application tracking and candidate evaluation.</p><div className="project-path"><span>Research</span><b>→</b><span>Requirements</span><b>→</b><span>Modeling</span><b>→</b><span>Prototype</span></div><div className="chips">{['Business Analysis','HRM','BPMN / UML','System Design','Prototype'].map(x=><span key={x}>{x}</span>)}</div><a className="text-link" href="/projects/recruitment-management">Explore Full Case Study <ArrowRight size={16}/></a></div><ProjectVisual/></div></Section>
+
+    <Section id="skills" eyebrow="04 / SKILLS & TOOLS" title="A practical BA toolkit for analysis, modeling and delivery"><div className="skill-groups">{[
+      ['Analysis',['Requirement Elicitation','Requirement Analysis','Business Process Analysis','As-Is / To-Be','Business Rules']],
+      ['Specification',['BRD','SRS/FSD','User Story','Acceptance Criteria','Use Case','Test Case']],
+      ['Modeling & UI',['BPMN','UML','Use Case','Activity','Sequence','ERD','Wireframe / Mockup']],
+      ['Delivery & Tools',['SIT/UAT','Jira','SQL','Figma','Draw.io','Lucidchart','Canva']]
+    ].map(([h,items],index)=><article key={h as string}><span className="skill-index">0{index+1}</span><p className="eyebrow">{h as string}</p><div className="skill-list">{(items as string[]).map(i=><span key={i}>{i}</span>)}</div></article>)}</div></Section>
+
+    <Section id="contact" eyebrow="05 / CONTACT" title="Interested in Business Analysis, ERP and HRM opportunities."><div className="contact-grid"><div><p className="contact-copy">I’m building my career around end-to-end Business Analysis: understanding business processes, defining clear requirements and working with delivery teams to turn them into usable systems.</p></div><div className="contact-list"><a href="https://github.com/khongnhoten2677-afk" target="_blank" rel="noreferrer"><span>GitHub</span><ArrowUpRight size={17}/></a><a href="/projects/recruitment-management"><span>Recruitment Case Study</span><ArrowRight size={17}/></a></div></div></Section>
+  </main><footer><div className="container"><span>Tuan Minh · Business Analyst Portfolio</span><span>ERP · HRM · Business Analysis</span></div></footer></>
 }
 
 const metrics = [
